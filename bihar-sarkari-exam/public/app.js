@@ -1,15 +1,83 @@
-const jobs=[
-{id:1,title:"BPSC TRE 4.0 — School Teacher",dept:"Bihar Public Service Commission",cat:"Teaching",vac:"32,388",status:"आवेदन / विज्ञापन अपडेट",ad:"https://bpsc.bihar.gov.in/",apply:"https://onlinebpsc.bihar.gov.in/",date:"21 September 2026 से registration update",tag:"NEW"},
-{id:2,title:"BPSC 72nd Combined Competitive Examination",dept:"BPSC",cat:"BPSC",vac:"1,189",status:"भर्ती / परीक्षा अपडेट",ad:"https://bpsc.bihar.gov.in/",apply:"https://onlinebpsc.bihar.gov.in/",date:"Preliminary exam calendar: 25 October 2026",tag:"HOT"},
-{id:3,title:"Police Sub-Inspector — Special Branch",dept:"BPSSC",cat:"Police",vac:"—",status:"Advt. No. 09/2026",ad:"https://bpssc.bihar.gov.in/",apply:"https://bpssc.bihar.gov.in/",date:"Official notice: July 2026",tag:"POLICE"},
-{id:4,title:"Company Commander — Bihar Home Guard",dept:"BPSSC / Home Guard",cat:"Home Guard",vac:"—",status:"Advt. No. 11/2026",ad:"https://bpssc.bihar.gov.in/A-HG.htm",apply:"https://bpssc.bihar.gov.in/A-HG.htm",date:"Apply Online notice: 09 September 2026",tag:"NEW"},
-{id:5,title:"Range Officer of Forests",dept:"BPSSC / Environment, Forest & Climate Change",cat:"Forest",vac:"—",status:"Advt. No. 10/2026",ad:"https://bpssc.bihar.gov.in/A-EFC.htm",apply:"https://bpssc.bihar.gov.in/A-EFC.htm",date:"Official application notice: July 2026",tag:"FOREST"},
-{id:6,title:"Constable (Operator) — Bihar Police",dept:"CSBC",cat:"Police",vac:"993",status:"Advt. No. 02/2026",ad:"https://csbc.bihar.gov.in/NewsGroup.htm",apply:"https://csbc.bihar.gov.in/",date:"Recruitment notices / exam updates",tag:"POLICE"},
-{id:7,title:"Constable — Special Branch Close Cadre",dept:"CSBC",cat:"Police",vac:"83",status:"Advt. No. 01/2026",ad:"https://csbc.bihar.gov.in/NewsGroup.htm",apply:"https://csbc.bihar.gov.in/",date:"PST / DV updates available",tag:"POLICE"},
-{id:8,title:"Bihar Mega Job Fair & Employment Mela",dept:"Bihar Employment / DETJOB",cat:"Employment",vac:"Various",status:"District-wise job fairs",ad:"https://detjob.bihar.gov.in/hi/",apply:"https://detjob.bihar.gov.in/hi/",date:"Multiple fairs in September–October 2026",tag:"JOB FAIR"}
+const centralJobs=[
+{id:"c1",state:"Central",title:"SSC CHSL 2026",dept:"Staff Selection Commission",post:"Group-C posts",vac:"—",status:"आवेदन खुला",date:"Last date: 07 October 2026",tag:"NEW",ad:"https://ssc.gov.in/",apply:"https://ssc.gov.in/",cat:"SSC"},
+{id:"c2",state:"Central",title:"UPSC Scientist-B — Ministry of Earth Sciences",dept:"Union Public Service Commission",post:"Scientist-B",vac:"9",status:"Recruitment notice",date:"Advertisement 05/2026 • uploaded 15 September 2026",tag:"UPSC",ad:"https://www.upsc.gov.in/recruitment/recruitment-test/notices",apply:"https://upsconline.nic.in/",cat:"UPSC"},
+{id:"c3",state:"Central",title:"Employment News — All Jobs",dept:"Government of India / Employment News",post:"Various Central Govt jobs",vac:"Various",status:"Latest advertisements",date:"Official weekly employment listings",tag:"CENTRAL",ad:"https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All",apply:"https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All",cat:"Central"}
 ];
-let activeCat="All";
-function setCat(c){activeCat=c;renderFilters();renderJobs();document.getElementById('jobs').scrollIntoView({behavior:'smooth'})}
-function renderFilters(){document.getElementById('filters').innerHTML=['All','BPSC','Police','Teaching','Home Guard','Forest','Employment'].map(c=>'<button class="'+(activeCat===c?'on':'')+'" onclick="setCat(\''+c+'\')">'+(c==='All'?'सभी':c)+'</button>').join('')}
-function renderJobs(){const q=(document.getElementById('search').value||'').toLowerCase();const list=jobs.filter(j=>(activeCat==='All'||j.cat===activeCat)&&[j.title,j.dept,j.cat,j.status].join(' ').toLowerCase().includes(q));document.getElementById('jobsGrid').innerHTML=list.map(j=>'<article class="job"><div class="job-head"><span class="tag">'+j.tag+'</span><span class="cat">'+j.cat+'</span></div><h3>'+j.title+'</h3><p class="dept">'+j.dept+'</p><div class="details"><span><b>Vacancy</b>'+j.vac+'</span><span><b>Status</b>'+j.status+'</span><span><b>Update</b>'+j.date+'</span></div><div class="actions"><a class="ad" href="'+j.ad+'" target="_blank" rel="noopener">Advertisement ↗</a><a class="apply" href="'+j.apply+'" target="_blank" rel="noopener">Apply Online ↗</a></div></article>').join('')||'<div class="empty">कोई भर्ती नहीं मिली। दूसरी category या keyword चुनें।</div>'}
-renderFilters();renderJobs();
+
+const states=[
+{name:"Bihar",code:"BR",portal:"https://bpsc.bihar.gov.in/hi/",apply:"https://onlinebpsc.bihar.gov.in/",desc:"BPSC, CSBC, BPSSC, BTSC और Bihar Employment/DETJOB की भर्ती।",jobs:[
+{id:"br1",state:"Bihar",title:"BPSC TRE 4.0 — School Teacher",dept:"BPSC / Education Department",post:"School Teacher",vac:"46,595 (calendar)",status:"विज्ञापन / परीक्षा अपडेट",date:"Exam calendar: 22–27 September 2026; verify current advertisement",tag:"TEACHING",ad:"https://bpsc.bihar.gov.in/hi/",apply:"https://onlinebpsc.bihar.gov.in/",cat:"Teaching"},
+{id:"br2",state:"Bihar",title:"BPSC 72nd Combined Competitive Examination",dept:"Bihar Public Service Commission",post:"Civil Services",vac:"1,189",status:"परीक्षा / नोटिस अपडेट",date:"Official BPSC notices में current updates",tag:"BPSC",ad:"https://bpsc.bihar.gov.in/hi/",apply:"https://onlinebpsc.bihar.gov.in/",cat:"Bihar"},
+{id:"br3",state:"Bihar",title:"Company Commander — Bihar Home Guard",dept:"BPSSC / Bihar Home Guard",post:"Company Commander",vac:"—",status:"Advt. 11/2026",date:"Official Home Guard recruitment page",tag:"HOME GUARD",ad:"https://bpssc.bihar.gov.in/A-HG.htm",apply:"https://bpssc.bihar.gov.in/A-HG.htm",cat:"Bihar"},
+{id:"br4",state:"Bihar",title:"Range Officer of Forests",dept:"BPSSC / Forest Department",post:"Range Officer",vac:"—",status:"Advt. 10/2026",date:"Official forest recruitment page",tag:"FOREST",ad:"https://bpssc.bihar.gov.in/A-EFC.htm",apply:"https://bpssc.bihar.gov.in/A-EFC.htm",cat:"Bihar"}
+]},
+{name:"Uttar Pradesh",code:"UP",portal:"https://uppsc.up.nic.in/CandidatePages/Notifications.aspx",apply:"https://uppsc.up.nic.in/",desc:"UPPSC और अन्य राज्य भर्ती बोर्ड की आधिकारिक सूचनाएँ।",jobs:[
+{id:"up1",state:"Uttar Pradesh",title:"UPPSC Direct Recruitment — D-2/E-1/2026",dept:"Uttar Pradesh Public Service Commission",post:"Direct Recruitment",vac:"—",status:"आवेदन खुला",date:"14 September – 14 October 2026",tag:"OPEN",ad:"https://uppsc.up.nic.in/CandidatePages/Notifications.aspx",apply:"https://uppsc.up.nic.in/",cat:"State"},
+{id:"up2",state:"Uttar Pradesh",title:"UP Police / Home Guard Updates",dept:"UP Police Recruitment & Promotion Board",post:"Police / Home Guard",vac:"—",status:"Official notices / PET updates",date:"September 2026 notices available",tag:"POLICE",ad:"https://www.uppbpb.gov.in/",apply:"https://www.uppbpb.gov.in/",cat:"Police"}
+]},
+{name:"Madhya Pradesh",code:"MP",portal:"https://esb.mp.gov.in/home_n.html",apply:"https://esb.mp.gov.in/home_n.html",desc:"MP Employees Selection Board की परीक्षा और आवेदन।",jobs:[
+{id:"mp1",state:"Madhya Pradesh",title:"Police Constable (G.D.) Recruitment Test 2026",dept:"MP Employees Selection Board",post:"Police Constable",vac:"—",status:"Online form update",date:"Start date: 22 September 2026",tag:"POLICE",ad:"https://esb.mp.gov.in/home_n.html",apply:"https://esb.mp.gov.in/home_n.html",cat:"Police"},
+{id:"mp2",state:"Madhya Pradesh",title:"Subedar & Sub-Inspector Recruitment Test 2026",dept:"MP Employees Selection Board",post:"Subedar / SI",vac:"—",status:"Online form update",date:"Start date: 09 September 2026",tag:"POLICE",ad:"https://esb.mp.gov.in/home_n.html",apply:"https://esb.mp.gov.in/home_n.html",cat:"Police"},
+{id:"mp3",state:"Madhya Pradesh",title:"Subedar (Stenographer) & ASI Recruitment Test 2026",dept:"MP Employees Selection Board",post:"Subedar / ASI",vac:"—",status:"Form opening",date:"Start date: 24 September 2026",tag:"NEW",ad:"https://esb.mp.gov.in/home_n.html",apply:"https://esb.mp.gov.in/home_n.html",cat:"State"}
+]},
+{name:"Haryana",code:"HR",portal:"https://www.hssc.gov.in/advertisement",apply:"https://www.hssc.gov.in/",desc:"HSSC Group-C / Group-D और CET भर्ती।",jobs:[
+{id:"hr1",state:"Haryana",title:"CET Group-D — Advt. 05/2026",dept:"Haryana Staff Selection Commission",post:"Group-D",vac:"—",status:"Official apply/update portal",date:"Current HSSC notice",tag:"CET",ad:"https://www.hssc.gov.in/advertisement",apply:"https://www.hssc.gov.in/",cat:"State"},
+{id:"hr2",state:"Haryana",title:"HSSC Group-C — Advt. 06/2026",dept:"Haryana Staff Selection Commission",post:"Group-C",vac:"—",status:"Advertisement / Apply",date:"Published 22 June 2026",tag:"GROUP-C",ad:"https://www.hssc.gov.in/advertisement",apply:"https://www.hssc.gov.in/",cat:"State"}
+]},
+{name:"Rajasthan",code:"RJ",portal:"https://recruitment.rajasthan.gov.in/",apply:"https://recruitment.rajasthan.gov.in/",desc:"Rajasthan Recruitment Portal पर unified recruitment information।",jobs:[
+{id:"rj1",state:"Rajasthan",title:"Contractual Safai Karamchari — 2026",dept:"Local Self Government, Rajasthan",post:"Safai Karamchari",vac:"—",status:"Apply",date:"Last date shown on portal: 28 September 2026",tag:"OPEN",ad:"https://recruitment.rajasthan.gov.in/",apply:"https://recruitment.rajasthan.gov.in/",cat:"State"}
+]},
+{name:"Odisha",code:"OD",portal:"https://ossc.gov.in/Public/OSSC/Default.aspx",apply:"https://ossc.gov.in/Public/OSSC/Default.aspx",desc:"OSSC की current recruitment/exam notices।",jobs:[
+{id:"od1",state:"Odisha",title:"Combined Graduate Level Recruitment Examination (CGLRE) 2025",dept:"Odisha Staff Selection Commission",post:"Graduate Level posts",vac:"—",status:"Certificate Verification / preference update",date:"September 2026 official updates",tag:"UPDATE",ad:"https://ossc.gov.in/Public/OSSC/Default.aspx",apply:"https://ossc.gov.in/Public/OSSC/Default.aspx",cat:"State"},
+{id:"od2",state:"Odisha",title:"Combined Higher Secondary Level Recruitment Examination 2025",dept:"Odisha Staff Selection Commission",post:"10+2 level specialist posts",vac:"—",status:"Preliminary exam / admission letter update",date:"September 2026 official update",tag:"12TH",ad:"https://ossc.gov.in/Public/OSSC/Default.aspx",apply:"https://ossc.gov.in/Public/OSSC/Default.aspx",cat:"State"}
+]},
+{name:"Jharkhand",code:"JH",portal:"https://www.jpsc.gov.in/",apply:"https://www.jpsc.gov.in/",desc:"JPSC examination calendar और recruitment notices।",jobs:[
+{id:"jh1",state:"Jharkhand",title:"Combined Civil Services Examination 2025",dept:"Jharkhand Public Service Commission",post:"Civil Services",vac:"—",status:"Exam calendar / schedule",date:"JPSC 2026 calendar में examination stages",tag:"JPSC",ad:"https://www.jpsc.gov.in/",apply:"https://www.jpsc.gov.in/",cat:"State"},
+{id:"jh2",state:"Jharkhand",title:"Inspector of Factories — Advt. 01/2025",dept:"JPSC",post:"Inspector of Factories",vac:"—",status:"Calendar update",date:"Written examination scheduled in 2026 calendar",tag:"JPSC",ad:"https://www.jpsc.gov.in/",apply:"https://www.jpsc.gov.in/",cat:"State"}
+]},
+{name:"West Bengal",code:"WB",portal:"https://www.psc.wb.gov.in/",apply:"https://www.psc.wb.gov.in/",desc:"WBPSC recruitment advertisements और application portal।",jobs:[
+{id:"wb1",state:"West Bengal",title:"Principal — District Institute of Education and Training",dept:"West Bengal Public Service Commission",post:"Principal",vac:"12",status:"Advertisement 05/2026 — application closed",date:"Application: 30 April–21 May 2026",tag:"CLOSED",ad:"https://www.psc.wb.gov.in/",apply:"https://www.psc.wb.gov.in/",cat:"State"}
+]},
+{name:"Maharashtra",code:"MH",portal:"https://mpsc.gov.in/",apply:"https://mpsc.gov.in/",desc:"MPSC official recruitment and examination portal।",jobs:[
+{id:"mh1",state:"Maharashtra",title:"MPSC Recruitment & Examination Updates",dept:"Maharashtra Public Service Commission",post:"Various State Services",vac:"Various",status:"Official portal",date:"Check latest advertisement before applying",tag:"MPSC",ad:"https://mpsc.gov.in/",apply:"https://mpsc.gov.in/",cat:"State"}
+]},
+{name:"Gujarat",code:"GJ",portal:"https://gpsc.gujarat.gov.in/",apply:"https://gpsc.gujarat.gov.in/",desc:"GPSC state recruitment information।",jobs:[
+{id:"gj1",state:"Gujarat",title:"GPSC Recruitment Updates",dept:"Gujarat Public Service Commission",post:"Various",vac:"Various",status:"Official portal",date:"Check latest advertisement",tag:"GPSC",ad:"https://gpsc.gujarat.gov.in/",apply:"https://gpsc.gujarat.gov.in/",cat:"State"}
+]},
+{name:"Delhi",code:"DL",portal:"https://delhi.gov.in/",apply:"https://delhi.gov.in/",desc:"Delhi Government recruitment and employment links।",jobs:[
+{id:"dl1",state:"Delhi",title:"Delhi Government Recruitment Updates",dept:"Government of NCT of Delhi",post:"Various",vac:"Various",status:"Official portal",date:"Check department-wise current vacancy",tag:"DELHI",ad:"https://delhi.gov.in/",apply:"https://delhi.gov.in/",cat:"State"}
+]},
+{name:"Punjab",code:"PB",portal:"https://www.pgrkam.com/",apply:"https://www.pgrkam.com/",desc:"Punjab government employment and recruitment information।",jobs:[
+{id:"pb1",state:"Punjab",title:"Punjab Government Job / Employment Updates",dept:"Punjab Government",post:"Various",vac:"Various",status:"Official employment portal",date:"Check latest vacancy",tag:"PUNJAB",ad:"https://www.pgrkam.com/",apply:"https://www.pgrkam.com/",cat:"State"}
+]},
+{name:"Kerala",code:"KL",portal:"https://www.keralapsc.gov.in/",apply:"https://www.keralapsc.gov.in/",desc:"Kerala PSC recruitment portal।",jobs:[
+{id:"kl1",state:"Kerala",title:"Kerala PSC Recruitment Updates",dept:"Kerala Public Service Commission",post:"Various",vac:"Various",status:"Official portal",date:"Check latest notification",tag:"KPSC",ad:"https://www.keralapsc.gov.in/",apply:"https://www.keralapsc.gov.in/",cat:"State"}
+]},
+{name:"Tamil Nadu",code:"TN",portal:"https://www.tnpsc.gov.in/",apply:"https://www.tnpsc.gov.in/",desc:"TNPSC recruitment and examinations।",jobs:[
+{id:"tn1",state:"Tamil Nadu",title:"TNPSC Recruitment Updates",dept:"Tamil Nadu Public Service Commission",post:"Various",vac:"Various",status:"Official portal",date:"Check latest notification",tag:"TNPSC",ad:"https://www.tnpsc.gov.in/",apply:"https://www.tnpsc.gov.in/",cat:"State"}
+]}
+];
+
+const portals=[
+["SSC","Staff Selection Commission","https://ssc.gov.in/"],["UPSC","Union Public Service Commission","https://www.upsc.gov.in/"],
+["BPSC","Bihar Public Service Commission","https://bpsc.bihar.gov.in/hi/"],["CSBC","Bihar Police Constable","https://csbc.bihar.gov.in/"],
+["BPSSC","Bihar Police SI / Home Guard","https://bpssc.bihar.gov.in/"],["UPPSC","Uttar Pradesh PSC","https://uppsc.up.nic.in/"],
+["MP ESB","Madhya Pradesh Employees Selection Board","https://esb.mp.gov.in/home_n.html"],["HSSC","Haryana Staff Selection Commission","https://www.hssc.gov.in/"],
+["Rajasthan","Rajasthan Recruitment Portal","https://recruitment.rajasthan.gov.in/"],["OSSC","Odisha Staff Selection Commission","https://ossc.gov.in/Public/OSSC/Default.aspx"],
+["JPSC","Jharkhand Public Service Commission","https://www.jpsc.gov.in/"],["WBPSC","West Bengal PSC","https://www.psc.wb.gov.in/"],
+["MPSC","Maharashtra PSC","https://mpsc.gov.in/"],["GPSC","Gujarat PSC","https://gpsc.gujarat.gov.in/"],
+["Kerala PSC","Kerala Public Service Commission","https://www.keralapsc.gov.in/"],["TNPSC","Tamil Nadu PSC","https://www.tnpsc.gov.in/"]
+];
+
+const allJobs=[...centralJobs,...states.flatMap(s=>s.jobs)];
+let activeState="Bihar", activeCat="All";
+const esc=s=>String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+function card(j){const open=j.status.includes("आवेदन खुला")||j.status==="Apply"||j.status.includes("Online form")||j.status.includes("Form opening");return `<article class="job"><div class="job-head"><span class="tag">${esc(j.tag)}</span><span class="cat">${esc(j.state)}</span></div><h3>${esc(j.title)}</h3><p class="dept">${esc(j.dept)}</p><div class="details"><span><b>Post</b>${esc(j.post)}</span><span><b>Vacancy</b>${esc(j.vac)}</span><span><b>Status</b>${esc(j.status)}</span></div><div class="update">📅 ${esc(j.date)}</div><div class="actions"><a class="ad" href="${j.ad}" target="_blank" rel="noopener">Advertisement ↗</a><a class="apply ${open?"":"disabled"}" href="${open?j.apply:j.ad}" target="_blank" rel="noopener">${open?"Apply Online ↗":"Official Status ↗"}</a></div></article>`}
+function renderCentral(){const q=(document.getElementById("centralSearch").value||"").toLowerCase();document.getElementById("centralGrid").innerHTML=centralJobs.filter(j=>[j.title,j.dept,j.post,j.status].join(" ").toLowerCase().includes(q)).map(card).join("")}
+function selectState(name){activeState=name;if(name==="All"){document.getElementById("stateInfo").innerHTML="";document.getElementById("stateJobs").innerHTML=states.flatMap(s=>s.jobs).map(card).join("");return}const s=states.find(x=>x.name===name)||states[0];document.getElementById("stateSelect").value=s.name;document.getElementById("stateInfo").innerHTML=`<div class="state-banner"><div><b>🇮🇳 ${s.name} Government Jobs</b><p>${s.desc}</p></div><a href="${s.portal}" target="_blank" rel="noopener">Official Portal ↗</a></div>`;document.getElementById("stateJobs").innerHTML=s.jobs.map(card).join("")}
+function renderTabs(){document.getElementById("stateTabs").innerHTML=states.map(s=>`<button class="${activeState===s.name?"on":""}" onclick="selectState('${s.name}')">${s.code} · ${s.name}</button>`).join("")}
+function setCat(c){activeCat=c;document.getElementById("jobs").scrollIntoView({behavior:"smooth"});renderAll();renderFilters()}
+function renderFilters(){const cats=["All","Central","Bihar","Police","Teaching","SSC","UPSC","State"];document.getElementById("filters").innerHTML=cats.map(c=>`<button class="${activeCat===c?"on":""}" onclick="setCat('${c}')">${c==="All"?"सभी":c}</button>`).join("")}
+function renderAll(){const q=(document.getElementById("search").value||"").toLowerCase();let list=allJobs.filter(j=>[j.title,j.dept,j.post,j.state,j.cat,j.status].join(" ").toLowerCase().includes(q));if(activeCat==="Central")list=list.filter(j=>j.state==="Central");else if(activeCat==="Bihar")list=list.filter(j=>j.state==="Bihar");else if(activeCat==="State")list=list.filter(j=>j.state!=="Central"&&j.state!=="Bihar");else if(activeCat!=="All")list=list.filter(j=>j.cat===activeCat);document.getElementById("jobsGrid").innerHTML=list.map(card).join("")||'<div class="empty">कोई भर्ती नहीं मिली।</div>'}
+function init(){document.getElementById("statCentral").textContent=centralJobs.length;document.getElementById("statStates").textContent=states.length;document.getElementById("statJobs").textContent=allJobs.length;document.getElementById("stateSelect").innerHTML='<option value="All">सभी राज्य</option>'+states.map(s=>`<option value="${s.name}">${s.name}</option>`).join("");document.getElementById("portalGrid").innerHTML=portals.map(p=>`<a href="${p[2]}" target="_blank" rel="noopener"><b>${p[0]}</b><span>${p[1]}</span></a>`).join("");renderTabs();renderFilters();renderCentral();renderAll();selectState(activeState)}
+init();
