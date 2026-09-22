@@ -51,5 +51,5 @@ app.get('/api/admin/orders',admin,(req,res)=>{const d=read();res.json(d.orders.m
 app.post('/api/admin/orders/:id/status',admin,(req,res)=>{const {status}=req.body||{};if(!['approved','rejected','pending'].includes(status))return res.status(400).json({error:'Invalid status'});const d=read();const o=d.orders.find(x=>x.id===req.params.id);if(!o)return res.status(404).json({error:'Order not found'});o.status=status;write(d);res.json({ok:true});});
 
 app.get('/health',(req,res)=>res.json({ok:true}));
-app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'public','index.html')));
+app.use((req,res,next)=>{if(req.method==='GET' && !req.path.startsWith('/api/')) return res.sendFile(path.join(__dirname,'public','index.html')); next();});
 app.listen(PORT,()=>console.log('IGNOU site running on '+PORT));
