@@ -95,6 +95,29 @@ const portals=[
 ["Kerala PSC","Kerala Public Service Commission","https://www.keralapsc.gov.in/"],["TNPSC","Tamil Nadu PSC","https://www.tnpsc.gov.in/"]
 ];
 
+
+const scholarshipForms=[
+{id:"sch1",title:"NSP Scholarship 2026-27",dept:"National Scholarship Portal",type:"Central / State / Welfare Scholarships",status:"OPEN",date:"Academic Year 2026-27 • Portal open from 01 June 2026",vac:"Multiple Schemes",tag:"NSP",link:"https://scholarships.gov.in/"},
+{id:"sch2",title:"PM-USP Central Sector Scholarship (CSSS) — Renewal",dept:"Department of Higher Education",type:"Merit Scholarship",status:"OPEN",date:"Student application/renewal last date: 30 September 2026",vac:"As per scheme",tag:"CENTRAL",link:"https://scholarships.gov.in/All-Scholarships"},
+{id:"sch3",title:"National Means Cum Merit Scholarship (NMMSS)",dept:"Department of School Education & Literacy",type:"Merit Scholarship",status:"OPEN",date:"Student application last date: 30 September 2026",vac:"As per scheme",tag:"SCHOOL",link:"https://scholarships.gov.in/All-Scholarships"},
+{id:"sch4",title:"Post Matric Scholarship for Students with Disabilities",dept:"Government of India",type:"Post Matric Scholarship",status:"OPEN",date:"Student application last date: 31 October 2026",vac:"As per scheme",tag:"PwD",link:"https://scholarships.gov.in/All-Scholarships"},
+{id:"sch5",title:"Top Class Education for Students with Disabilities",dept:"Government of India",type:"Higher Education Scholarship",status:"OPEN",date:"Student application last date: 31 October 2026",vac:"As per scheme",tag:"PwD",link:"https://scholarships.gov.in/All-Scholarships"},
+{id:"sch6",title:"National Fellowship & Scholarship for Higher Education of ST Students",dept:"Ministry of Tribal Affairs",type:"Higher Education Scholarship",status:"OPEN",date:"Student application last date: 31 October 2026",vac:"As per scheme",tag:"ST",link:"https://scholarships.gov.in/All-Scholarships"},
+{id:"sch7",title:"PM Scholarship Scheme for Wards of States/UTs Police Personnel Martyred During Terror/Naxal Attacks",dept:"Ministry of Home Affairs",type:"Merit Scholarship",status:"OPEN",date:"Student application last date: 31 October 2026",vac:"As per scheme",tag:"PMSS",link:"https://scholarships.gov.in/All-Scholarships"},
+{id:"sch8",title:"Bihar Matric Scholarship 2026",dept:"Government of Bihar — MedhaSoft",type:"10th Passed Scholarship / Protsahan",status:"REGISTRATION OPEN",date:"Year 2026 • Student registration open",vac:"Eligible students",tag:"BIHAR",link:"https://medhasoft.bihar.gov.in/Matric2627/"},
+{id:"sch9",title:"Bihar Inter Scholarship 2026",dept:"Government of Bihar — MedhaSoft",type:"Intermediate Scholarship / Protsahan",status:"REGISTRATION OPEN",date:"Year 2026 • Student registration open",vac:"Eligible students",tag:"BIHAR",link:"https://medhasoft.bihar.gov.in/Inter2627/"},
+{id:"sch10",title:"Bihar MedhaSoft — Mukhyamantri Kanya Utthan / Balika Protsahan",dept:"Government of Bihar",type:"Graduation / School Incentive",status:"REGISTRATION OPEN",date:"2026 applications/registration available on official portal",vac:"Eligible students",tag:"BIHAR",link:"https://medhasoft.bihar.gov.in/"},
+{id:"sch11",title:"Bihar SC/ST Inter Medhavriti 2026",dept:"Government of Bihar — MedhaSoft",type:"SC/ST Inter Scholarship",status:"REGISTRATION / APPLICATION",date:"2026 portal available; check official notice for applicable deadline",vac:"Eligible students",tag:"BIHAR",link:"https://medhasoft.bihar.gov.in/InterSCST2026/"}
+];
+
+function renderScholarshipForms(){
+ const box=document.getElementById("scholarshipForms");
+ if(!box)return;
+ const q=(document.getElementById("scholarshipSearch")?.value||"").toLowerCase();
+ const rows=scholarshipForms.filter(x=>(x.title+" "+x.dept+" "+x.type+" "+x.tag).toLowerCase().includes(q));
+ box.innerHTML=rows.map(x=>`<article class="notification-card"><div class="card-tag">${x.tag}</div><h3>${x.title}</h3><p><b>Department:</b> ${x.dept}</p><p><b>Type:</b> ${x.type}</p><p><b>Status:</b> ${x.status}</p><p><b>Date/Deadline:</b> ${x.date}</p><p><b>Eligibility/Seats:</b> ${x.vac}</p><a class="apply-btn" href="${x.link}" target="_blank" rel="noopener">Apply / Official Portal ↗</a></article>`).join("")||"<p>No scholarship form found.</p>";
+}
+
 const notifications=[
 {id:"nf1",title:"BPSC TRE 4.0 — Primary & Middle School Teacher",dept:"Bihar Public Service Commission",type:"School Teacher",vac:"32,388",status:"आवेदन खुला",date:"Registration: 25 September–26 October 2026",tag:"BPSC",link:"https://bpsc.bihar.gov.in/"},
 {id:"nf2",title:"IIM Bodh Gaya — Management Trainee cum Counsellor",dept:"IIM Bodh Gaya",type:"Management Trainee cum Counsellor",vac:"Various",status:"नई भर्ती",date:"Last date: 27 September 2026",tag:"BIHAR",link:"https://iimbg.ac.in/"},
